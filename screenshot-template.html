@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Boring Blocker - Screenshot</title>
+  <!-- 
+    HOW TO USE THIS TEMPLATE:
+    1. Open this HTML file in Chrome
+    2. Press F11 to go full screen
+    3. Use browser's screenshot tool or press Ctrl+Shift+S (macOS: Cmd+Shift+4) 
+    4. Capture the 640x400 mockup
+  -->
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #f8f9fa;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    
+    .screenshot-container {
+      width: 640px;
+      height: 400px;
+      position: relative;
+      background: linear-gradient(135deg, #e9f0ff 0%, #f5edff 100%);
+      border-radius: 8px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      display: flex;
+    }
+    
+    .browser-mockup {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .browser-header {
+      height: 24px;
+      background-color: #f0f0f0;
+      border-bottom: 1px solid #ddd;
+      display: flex;
+      align-items: center;
+      padding: 0 12px;
+    }
+    
+    .browser-buttons {
+      display: flex;
+      gap: 4px;
+      margin-right: 12px;
+    }
+    
+    .browser-button {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+    
+    .button-red { background-color: #ff5f57; }
+    .button-yellow { background-color: #ffbd2e; }
+    .button-green { background-color: #28c940; }
+    
+    .address-bar {
+      flex: 1;
+      background-color: white;
+      border-radius: 4px;
+      height: 16px;
+      margin: 0 12px;
+      padding: 0 8px;
+      display: flex;
+      align-items: center;
+      font-size: 10px;
+      color: #555;
+    }
+    
+    .browser-content {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: white;
+      position: relative;
+    }
+    
+    .extension-popup {
+      width: 380px;
+      height: 360px;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .extension-header {
+      text-align: center;
+      padding: 20px 0;
+    }
+    
+    .extension-header img {
+      width: 90px;
+      height: 90px;
+    }
+    
+    .extension-header h1 {
+      margin: 10px 0 0;
+      background: linear-gradient(90deg, #6366f1, #a855f7);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-size: 28px;
+      font-weight: bold;
+    }
+    
+    .extension-header p {
+      margin: 5px 0 0;
+      font-size: 16px;
+      color: #666;
+    }
+    
+    .extension-card {
+      margin: 0 20px 15px;
+      padding: 16px;
+      background-color: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(5px);
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+    
+    .switch-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+    
+    .switch-title {
+      font-weight: 500;
+      font-size: 16px;
+    }
+    
+    .switch {
+      width: 40px;
+      height: 22px;
+      background-color: #6366f1;
+      border-radius: 11px;
+      position: relative;
+    }
+    
+    .switch::after {
+      content: "";
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      background-color: white;
+      border-radius: 50%;
+      top: 2px;
+      right: 2px;
+      transition: all 0.3s;
+    }
+    
+    .replacement-label {
+      display: block;
+      font-size: 14px;
+      font-weight: 500;
+      color: #555;
+      margin-bottom: 6px;
+    }
+    
+    .input-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    
+    .input-field {
+      flex: 1;
+      height: 32px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      background-color: white;
+    }
+    
+    .save-button {
+      padding: 6px 12px;
+      background-color: #f0f5ff;
+      border: 1px solid #d4e2ff;
+      border-radius: 4px;
+      color: #6366f1;
+      font-weight: 500;
+      font-size: 14px;
+    }
+    
+    .suggestions {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+    
+    .suggestion-chip {
+      padding: 4px 0;
+      background-color: #f9fafb;
+      border: 1px solid #e5e7eb;
+      border-radius: 4px;
+      font-size: 12px;
+      text-align: center;
+    }
+    
+    .stats-card {
+      margin: 0 20px;
+      padding: 16px;
+      background-color: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(5px);
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+    
+    .stats-title {
+      font-weight: 500;
+      font-size: 16px;
+      margin-bottom: 12px;
+    }
+    
+    .stats-row {
+      margin-bottom: 8px;
+    }
+    
+    .stats-label-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 4px;
+    }
+    
+    .stats-label {
+      font-size: 14px;
+      color: #555;
+    }
+    
+    .stats-value {
+      font-size: 14px;
+      color: #6366f1;
+      font-weight: 500;
+    }
+    
+    .progress-bar {
+      height: 8px;
+      background-color: #e5e7eb;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    
+    .progress-fill {
+      height: 100%;
+      width: 65%;
+      background-color: #6366f1;
+      border-radius: 4px;
+    }
+    
+    .browser-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: flex;
+      justify-content: center;
+      padding-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="screenshot-container">
+    <div class="browser-mockup">
+      <div class="browser-header">
+        <div class="browser-buttons">
+          <div class="browser-button button-red"></div>
+          <div class="browser-button button-yellow"></div>
+          <div class="browser-button button-green"></div>
+        </div>
+        <div class="address-bar">https://twitter.com/</div>
+      </div>
+      <div class="browser-content">
+        <!-- Twitter-like background -->
+        <div class="browser-overlay">
+          <!-- Extension popup -->
+          <div class="extension-popup">
+            <div class="extension-header">
+              <img src="./icon-128.png" alt="Boring Blocker Logo">
+              <h1>The Boring Blocker</h1>
+              <p>Browse the web without seeing <span style="text-decoration: line-through;">you know who</span></p>
+            </div>
+            
+            <div class="extension-card">
+              <div class="switch-row">
+                <div class="switch-title">On/Off</div>
+                <div class="switch"></div>
+              </div>
+              
+              <div>
+                <label class="replacement-label">Replacement Text</label>
+                <div class="input-row">
+                  <div class="input-field"></div>
+                  <button class="save-button">Save</button>
+                </div>
+                
+                <div class="suggestions">
+                  <div class="suggestion-chip">[REDACTED]</div>
+                  <div class="suggestion-chip">Someone</div>
+                  <div class="suggestion-chip">That guy</div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="extension-card">
+              <div class="stats-title">Mentions to Filter</div>
+              <div class="suggestions" style="margin-top: 10px;">
+                <div class="suggestion-chip" style="display: flex; gap: 4px; align-items: center; justify-content: center">
+                  <div style="width: 14px; height: 14px; border: 1px solid #ddd; border-radius: 3px; background: #6366f1;"></div>
+                  Elon Musk
+                </div>
+                <div class="suggestion-chip" style="display: flex; gap: 4px; align-items: center; justify-content: center">
+                  <div style="width: 14px; height: 14px; border: 1px solid #ddd; border-radius: 3px; background: #6366f1;"></div>
+                  Elon
+                </div>
+                <div class="suggestion-chip" style="display: flex; gap: 4px; align-items: center; justify-content: center">
+                  <div style="width: 14px; height: 14px; border: 1px solid #ddd; border-radius: 3px; background: #6366f1;"></div>
+                  Musk
+                </div>
+              </div>
+            </div>
+            
+            <div class="stats-card">
+              <div class="stats-title">Statistics</div>
+              <div class="stats-row">
+                <div class="stats-label-row">
+                  <div class="stats-label">Total Mentions Replaced</div>
+                  <div class="stats-value">42</div>
+                </div>
+                <div class="progress-bar">
+                  <div class="progress-fill"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html> 
