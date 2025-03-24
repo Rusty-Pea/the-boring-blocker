@@ -48,6 +48,7 @@ Download the ZIP file from the latest [GitHub Release](https://github.com/Rusty-
 ## Future improvements
 - Mode where it actually removes the mentions instead of redacting them (via HTML tag blocking known for the big sites)
 - Add notification badges for when the above is ocurring
+- "Ignore on this site"
 
 ## Technologies
 

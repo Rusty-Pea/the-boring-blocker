@@ -8,7 +8,8 @@ let config = {
   mentionPatterns: [
     { id: "elon-musk", pattern: /\b(Elon\s+Musk)\b/gi, enabled: true },
     { id: "elon", pattern: /\b(Elon)\b/gi, enabled: true },
-    { id: "musk", pattern: /\b(Musk)\b/gi, enabled: true }
+    { id: "musk", pattern: /\b(Musk)\b/gi, enabled: true },
+    { id: "elonmusk", pattern: /\b(ElonMusk|Elon_Musk|@elonmusk)\b/gi, enabled: true }
   ]
 };
 
@@ -38,23 +39,25 @@ function loadConfiguration() {
   const savedMentions = localStorage.getItem("boring-blocker-mentions");
   if (savedMentions !== null) {
     try {
-      const mentions = JSON.parse(savedMentions);
-      // Filter out "e-musk" entries if they exist
-      const filteredMentions = mentions.filter(mention => mention.id !== "e-musk");
-      
-      // Update localStorage if we filtered anything out
-      if (mentions.length !== filteredMentions.length) {
-        localStorage.setItem("boring-blocker-mentions", JSON.stringify(filteredMentions));
+      const parsedMentions = JSON.parse(savedMentions);
+      for (const mention of parsedMentions) {
+        const existingPattern = config.mentionPatterns.find(p => p.id === mention.id);
+        if (existingPattern) {
+          existingPattern.enabled = mention.enabled;
+        }
       }
       
-      config.mentionPatterns.forEach(mention => {
-        const savedMention = filteredMentions.find(m => m.id === mention.id);
-        if (savedMention) {
-          mention.enabled = savedMention.enabled;
-        }
-      });
+      // Make sure elonmusk pattern is included
+      const hasElonmusk = config.mentionPatterns.some(pattern => pattern.id === "elonmusk");
+      if (!hasElonmusk) {
+        config.mentionPatterns.push({ 
+          id: "elonmusk", 
+          pattern: /\b(ElonMusk|Elon_Musk|@elonmusk)\b/gi, 
+          enabled: true 
+        });
+      }
     } catch (e) {
-      console.error("[The Boring Blocker] Error loading mentions:", e);
+      console.error("[The Boring Blocker] Error parsing saved mentions:", e);
     }
   }
 }

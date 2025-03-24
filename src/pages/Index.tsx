@@ -15,7 +15,8 @@ const Index = () => {
   const [mentions, setMentions] = useState([
     { id: "elon-musk", name: "Elon Musk", enabled: true },
     { id: "elon", name: "Elon", enabled: true },
-    { id: "musk", name: "Musk", enabled: true }
+    { id: "musk", name: "Musk", enabled: true },
+    { id: "elonmusk", name: "@elonmusk", enabled: true }
   ]);
   const { toast } = useToast();
 
@@ -134,8 +135,15 @@ const Index = () => {
     if (savedMentions !== null) {
       try {
         const parsedMentions = JSON.parse(savedMentions);
-        // Filter out "e-musk" entries if they exist
+        // Filter out any old entries if they exist
         const filteredMentions = parsedMentions.filter(mention => mention.id !== "e-musk");
+        
+        // Make sure elonmusk is included
+        const hasElonmusk = filteredMentions.some(mention => mention.id === "elonmusk");
+        if (!hasElonmusk) {
+          filteredMentions.push({ id: "elonmusk", name: "@elonmusk", enabled: true });
+        }
+        
         setMentions(filteredMentions);
       } catch (e) {
         console.error("Error parsing saved mentions:", e);
