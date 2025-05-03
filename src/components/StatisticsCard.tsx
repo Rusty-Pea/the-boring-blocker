@@ -1,5 +1,4 @@
 import { Card } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
 
 interface StatisticsCardProps {
   statistics: {
@@ -19,7 +18,6 @@ const StatisticsCard = ({ statistics }: StatisticsCardProps) => {
             <span className="text-sm font-medium text-gray-700">Total Mentions Replaced</span>
             <span className="text-sm font-medium text-indigo-600">{statistics.totalReplaced}</span>
           </div>
-          <Progress value={Math.min(statistics.totalReplaced / 10 * 100, 100)} className="h-2" />
         </div>
       </div>
     </Card>

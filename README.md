@@ -46,12 +46,21 @@ Download the ZIP file from the latest [GitHub Release](https://github.com/Rusty-
 - Image replacements rely on the alt text having mentions of the person and so won't work if they aren't there
 
 ## Future improvements
+- Fix errors showing up in Chrome console
+- Fix bug where the state of on/off is stored as is the image blocking
+- Go through the code to check there is no unnecessary bullshit in it, it was all written by LLMs after all...
 - Mode where it actually removes the mentions instead of redacting them (via HTML tag blocking known for the big sites)
 - Add notification badges for when the above is ocurring
 - "Ignore on this site"
 
-## Technologies
+## Features
+- Choose which mentions to redact
+- Choose whether to redact images (searches for selected mentions in image alt-text)
+- Can turn on and off
+- Shows badge for how many mentions were redacted on this page
+- Very basic stats stored in local storage
 
+## Technologies
 - Vite
 - TypeScript
 - React

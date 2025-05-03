@@ -1,20 +1,36 @@
+import { HashRouter as Router, Routes, Route } from "react-router-dom";
+import Index from "@/pages/Index";
+import SettingsPage from "@/pages/SettingsPage";
+import NotFound from "@/pages/NotFound";
+import { Toaster } from "@/components/ui/sonner";
+import { AppProvider, ToastContext } from "@/context/AppContext";
+import { toast } from "sonner";
 
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import Index from "./pages/Index";
+function App() {
+  // Provide toast function to avoid circular dependency
+  const toastValue = {
+    toast: (args: { title: string; description?: string; duration?: number }) => {
+      toast(args.title, {
+        description: args.description,
+        duration: args.duration,
+      });
+    },
+  };
 
-const queryClient = new QueryClient();
-
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <Index />
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+  return (
+    <ToastContext.Provider value={toastValue}>
+      <AppProvider>
+        <Router>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/settings" element={<SettingsPage />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+          <Toaster />
+        </Router>
+      </AppProvider>
+    </ToastContext.Provider>
+  );
+}
 
 export default App;

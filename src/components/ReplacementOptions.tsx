@@ -71,11 +71,12 @@ const ReplacementOptions = ({
   
   return (
     <div className="space-y-4">
-      <div className="space-y-3">
-        <div>
-          <label htmlFor="replacement" className="text-sm font-medium text-gray-700 block mb-1">
-            Replacement Text
-          </label>
+      <div>
+        <div className="flex justify-between items-center mb-4">
+          <h3 className="text-lg font-medium">Replacement Text</h3>
+        </div>
+        
+        <div className="space-y-3">
           <div className="flex gap-2">
             <Input
               id="replacement"
@@ -88,20 +89,20 @@ const ReplacementOptions = ({
               Save
             </Button>
           </div>
-        </div>
-        
-        <div className="grid grid-cols-3 gap-2 pt-1">
-          {["[that guy]", "[REDACTED]", "Someone"].map((suggestion) => (
-            <Button 
-              key={suggestion}
-              variant="outline" 
-              size="sm"
-              className="text-xs h-7"
-              onClick={() => handleSuggestionClick(suggestion)}
-            >
-              {suggestion}
-            </Button>
-          ))}
+          
+          <div className="grid grid-cols-3 gap-2 pt-1">
+            {["[that guy]", "[REDACTED]", "Someone"].map((suggestion) => (
+              <Button 
+                key={suggestion}
+                variant="outline" 
+                size="sm"
+                className="text-xs h-7"
+                onClick={() => handleSuggestionClick(suggestion)}
+              >
+                {suggestion}
+              </Button>
+            ))}
+          </div>
         </div>
       </div>
     </div>
